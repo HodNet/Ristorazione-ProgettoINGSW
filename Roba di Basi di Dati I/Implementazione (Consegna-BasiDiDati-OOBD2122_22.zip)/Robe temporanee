@@ -1,0 +1,235 @@
+--CREATE TYPE ruolo_valido AS ENUM ('cameriere', 'cuoco', 'direttore', 'cassiere');
+
+/*
+CREATE TABLE Incarico
+(
+	ruolo ruolo_valido NOT NULL,
+	codCartaIdentità VARCHAR(10) NOT NULL,
+	FOREIGN KEY(codCartaIdentità) REFERENCES Personale(codCartaIdentità)
+); 
+*/
+
+
+
+
+
+
+
+INSERT INTO Avventore(codCartaIdentità, nome, cognome, n°telefono, dataDiArrivo, codT)
+VALUES ('VS17309328', 'Odetta', 'Toscani', '+39 332 0241113', '2022-01-29', 21),
+	   ('LY30989895', 'Rosalia', 'Pagnotto', '+39 351 8680295', '2022-01-29', 21),
+	   ('ES99973193', 'Enrico', 'Calabrese', '+39 359 2960322', '2022-01-29', 21),
+	   ('VV96537632', 'Demetrio', 'Iadanza', '+39 322 5803474', '2022-01-29', 21),
+	   ('NT40097811', 'Bonaventura', 'Ferrari', '+39 395 2884258', '2022-01-29', 21),
+	   ('AH78880039', 'Eberardo', 'Pinto', '+39 347 3450317', '2022-01-29', 21),
+	   ('AR12639853', 'Romeo', 'Pagnotto', '+39 346 1858014', '2022-01-29', 21),
+	   ('OX49360027', 'Lucia', 'Udinesi', '+39 313 6976969', '2022-01-29', 21),
+	   
+	   ('SS68974783', 'Dafne', 'Gallo', '+39 318 3938416', '2022-04-16', 19),
+	   ('YP81814467', 'Paola', 'Bucchi', '+39 358 7620976', '2022-04-16', 19),
+	   ('ZP10702334', 'Lucrezia', 'Onio', '+39 342 2113869', '2022-04-16', 19),
+	   ('OT27107189', 'Bruno', 'Bruto', '+39 386 6979091', '2022-04-16', 19),
+	   ('PS95543352', 'Chiara', 'Trevisano', '+39 367 1259301', '2022-04-16', 19),
+	   
+	   ('FN18198303', 'Natascia', 'Bellucci', '+39 320 0800954', '2019-03-22', 50),
+	   ('NK11059954', 'Luca', 'Suca', '+39 347 0415866', '2019-03-22', 50),
+	   ('QW44244762', 'Benedetta', 'Bona', '+39 397 9111029', '2019-03-22', 50),
+	   ('JL58000882', 'Donatella', 'Calabresi', '+39 369 7432346', '2019-03-22', 50),
+	   
+	   ('PU89722708', 'Silvio', 'Dellucci', '+39 327 2659479', '2022-03-19', 67),
+	   ('QT47042587', 'Manuela', 'Udinese', '+39 379 4943685', '2022-03-19', 67),
+	   ('HR85465990', 'Melinda', 'Loggia', '+39 354 2763037', '2022-03-19', 67),
+	   ('DT24378019', 'Imelda', 'Longo', '+39 398 4759066', '2022-03-19', 67),
+	   ('ZQ68888759', 'Alberto', 'Cremonesi', '+39 341 9880249', '2022-03-19', 67),
+	   ('KP4346800', 'Nereo', 'Colombo', '+39 393 3566940', '2022-03-19', 67),
+	   ('DW63772871', 'Ausilia', 'Costa', '+39 389 1307147', '2022-03-19', 67),
+	   ('WW42446670', 'Simona', 'Cremonesi', '+39 359 2584516', '2022-03-19', 67),
+	   ('VP39389476', 'Antonina', 'Manna', '+39 396 1839457', '2022-03-19', 67),
+	   ('YI95457886', 'Alfredo', 'Palermo', '+39 344 2025448', '2022-03-19', 67),
+	   ('NB7594523', 'Enzo', 'Berlino', '+39 386 8619132', '2022-03-19', 67),
+	   ('SH23367896', 'Gabriella', 'Lisbona', '+39 326 4727426', '2022-03-19', 67),
+	   ('WA60077395', 'Emanuela', 'Tokyo', '+39 390 0551881', '2022-03-19', 67),
+	   ('ZE1717988', 'Dionisio', 'Rio', '+39 312 9454098', '2022-03-19', 67),
+	   
+	   ('YI95457886', 'Alfredo', 'Palermo', '+39 344 2025448', '2015-12-04', 45),
+	   ('NB7594523', 'Enzo', 'Berlino', '+39 386 8619132', '2015-12-04', 45),
+	   ('SH23367896', 'Gabriella', 'Lisbona', '+39 326 4727426', '2015-12-04', 45),
+	   ('WA60077395', 'Emanuela', 'Tokyo', '+39 390 0551881', '2015-12-04', 45),
+	   ('ZE1717988', 'Dionisio', 'Rio', '+39 312 9454098', '2015-12-04', 45),
+	   
+	   ('WA60077395', 'Emanuela', 'Tokyo', '+39 390 0551881', '2019-09-10', 61),
+	   ('ZE1717988', 'Dionisio', 'Rio', '+39 312 9454098', '2019-09-10', 61),
+	   
+	   ('PU89722708', 'Silvio', 'Dellucci', '+39 327 2659479', '2022-01-29', 58),
+	   ('QT47042587', 'Manuela', 'Udinese', '+39 379 4943685', '2022-01-29', 58),
+	   ('HR85465990', 'Melinda', 'Loggia', '+39 354 2763037', '2022-01-29', 58),
+	   ('DT24378019', 'Imelda', 'Longo', '+39 398 4759066', '2022-01-29', 58),
+	   ('ZQ68888759', 'Alberto', 'Cremonesi', '+39 341 9880249', '2022-01-29', 58),
+	   ('KP4346800', 'Nereo', 'Colombo', '+39 393 3566940', '2022-01-29', 58),
+	   ('DW63772871', 'Ausilia', 'Costa', '+39 389 1307147', '2022-01-29', 58),
+	   ('WW42446670', 'Simona', 'Cremonesi', '+39 359 2584516', '2022-01-29', 58),
+	   
+	   ('YI95457886', 'Alfredo', 'Palermo', '+39 344 2025448', '2022-04-16', 48),
+	   ('NB7594523', 'Enzo', 'Berlino', '+39 386 8619132', '2022-04-16', 48),
+	   ('SH23367896', 'Gabriella', 'Lisbona', '+39 326 4727426', '2022-04-16', 48),
+	   ('WA60077395', 'Emanuela', 'Tokyo', '+39 390 0551881', '2022-04-16', 48),
+	   ('ZE1717988', 'Dionisio', 'Rio', '+39 312 9454098', '2022-04-16', 48),
+	   
+	   ('NC17557482', 'Arianna', 'Lombardi', '+39 347 7564462', '2019-03-22', 1),
+	   ('VL74633278', 'Alfonso', 'Napolitano', '+39 355 8303251', '2019-03-22', 1),
+	   ('GZ34428503', 'Emilia', 'Rossi', '+39 378 7959204', '2019-03-22', 1),
+	   ('ON48002895', 'Giulia', 'Corna', '+39 370 5090246', '2019-03-22', 1),
+	   
+	   ('PU89722708', 'Silvio', 'Dellucci', '+39 327 2659479', '2022-03-20', 67),
+	   ('QT47042587', 'Manuela', 'Udinese', '+39 379 4943685', '2022-03-20', 67),
+	   ('HR85465990', 'Melinda', 'Loggia', '+39 354 2763037', '2022-03-20', 67),
+	   ('DT24378019', 'Imelda', 'Longo', '+39 398 4759066', '2022-03-20', 67),
+	   ('ZQ68888759', 'Alberto', 'Cremonesi', '+39 341 9880249', '2022-03-20', 67),
+	   ('KP4346800', 'Nereo', 'Colombo', '+39 393 3566940', '2022-03-20', 67),
+	   ('DW63772871', 'Ausilia', 'Costa', '+39 389 1307147', '2022-03-20', 67),
+	   ('WW42446670', 'Simona', 'Cremonesi', '+39 359 2584516', '2022-03-20', 67),
+	   ('VP39389476', 'Antonina', 'Manna', '+39 396 1839457', '2022-03-20', 67),
+	   ('YI95457886', 'Alfredo', 'Palermo', '+39 344 2025448', '2022-03-20', 67),
+	   ('NB7594523', 'Enzo', 'Berlino', '+39 386 8619132', '2022-03-20', 67),
+	   ('SH23367896', 'Gabriella', 'Lisbona', '+39 326 4727426', '2022-03-20', 67),
+	   ('WA60077395', 'Emanuela', 'Tokyo', '+39 390 0551881', '2022-03-20', 67),
+	   ('ZE1717988', 'Dionisio', 'Rio', '+39 312 9454098', '2022-03-20', 67),
+	   
+	   ('KM38433214', 'Maurizio', 'Pisani', '+39 348 5353833', '2015-12-04', 10),
+	   ('JS57290713', 'Simone', 'Pelella', '+39 327 0429980', '2015-12-04', 10),
+	   ('WO38519827', 'Marco', 'Polo', '+39 383 0968732', '2015-12-04', 10),
+	   ('XU47825532', 'Aldo', 'Solo', '+39 324 5564475', '2015-12-04', 10),
+	   ('PX7230833', 'Rinaldo', 'Manganelli', '+39 351 3617698', '2015-12-04', 10),
+	   
+	   ('XZ36851494', 'Flora', 'De Luca', '+39 334 2840625', '2019-09-10', 22),
+	   ('JX36079434', 'Fabiana', 'Napolitano', '+39 365 4941207', '2019-09-10', 22),
+	   
+	   ('XZ36851494', 'Flora', 'De Luca', '+39 334 2840625', CURRENT_DATE, 1),
+	   ('JX36079434', 'Fabiana', 'Napolitano', '+39 365 4941207', CURRENT_DATE, 1),
+	   
+	   ('NC17557482', 'Arianna', 'Lombardi', '+39 347 7564462', CURRENT_DATE, 3),
+	   ('VL74633278', 'Alfonso', 'Napolitano', '+39 355 8303251', CURRENT_DATE, 3),
+	   ('GZ34428503', 'Emilia', 'Rossi', '+39 378 7959204', CURRENT_DATE, 3),
+	   ('ON48002895', 'Giulia', 'Corna', '+39 370 5090246', CURRENT_DATE, 3),
+	   
+	   ('FN18198303', 'Natascia', 'Bellucci', '+39 320 0800954', CURRENT_DATE, 4),
+	   ('NK11059954', 'Luca', 'Suca', '+39 347 0415866', CURRENT_DATE, 4),
+	   ('QW44244762', 'Benedetta', 'Bona', '+39 397 9111029', CURRENT_DATE, 4),
+	   ('JL58000882', 'Donatella', 'Calabresi', '+39 369 7432346', CURRENT_DATE, 4),
+	   
+	   ('VS17309328', 'Odetta', 'Toscani', '+39 332 0241113', CURRENT_DATE, 5),
+	   ('LY30989895', 'Rosalia', 'Pagnotto', '+39 351 8680295', CURRENT_DATE, 5),
+	   ('ES99973193', 'Enrico', 'Calabrese', '+39 359 2960322', CURRENT_DATE, 5),
+	   ('VV96537632', 'Demetrio', 'Iadanza', '+39 322 5803474', CURRENT_DATE, 5),
+	   
+	   ('SS68974783', 'Dafne', 'Gallo', '+39 318 3938416', CURRENT_DATE, 8),
+	   ('YP81814467', 'Paola', 'Bucchi', '+39 358 7620976', CURRENT_DATE, 8),
+	   ('ZP10702334', 'Lucrezia', 'Onio', '+39 342 2113869', CURRENT_DATE, 8),
+	   
+	   ('NT40097811', 'Bonaventura', 'Ferrari', '+39 395 2884258', CURRENT_DATE, 9),
+	   ('AH78880039', 'Eberardo', 'Pinto', '+39 347 3450317', CURRENT_DATE, 9),
+	   ('AR12639853', 'Romeo', 'Pagnotto', '+39 346 1858014', CURRENT_DATE, 9),
+	   ('OX49360027', 'Lucia', 'Udinesi', '+39 313 6976969', CURRENT_DATE, 9),
+	   
+	   ('AO20845887', 'Lillo', 'Lucchese', '+39 381 4638271', CURRENT_DATE, 12),
+	   ('FI97359180', 'Beatrice', 'Mazzi', '+39 330 1087420', CURRENT_DATE, 12),
+	   ('DM52465649', 'Raffaello', 'Siciliani', '+39 373 9769993', CURRENT_DATE, 12),
+	   
+	   ('OT27107189', 'Bruno', 'Bruto', '+39 386 6979091', CURRENT_DATE, 14),
+	   ('PS95543352', 'Chiara', 'Trevisano', '+39 367 1259301', CURRENT_DATE, 14),
+	   ('PU89722708', 'Silvio', 'Dellucci', '+39 327 2659479', CURRENT_DATE, 14),
+	   ('QT47042587', 'Manuela', 'Udinese', '+39 379 4943685', CURRENT_DATE, 14),
+	   ('HR85465990', 'Melinda', 'Loggia', '+39 354 2763037', CURRENT_DATE, 14),
+	   ('DT24378019', 'Imelda', 'Longo', '+39 398 4759066', CURRENT_DATE, 14),
+	   
+	   ('ZQ68888759', 'Alberto', 'Cremonesi', '+39 341 9880249', CURRENT_DATE, 15),
+	   ('KP4346800', 'Nereo', 'Colombo', '+39 393 3566940', CURRENT_DATE, 15),
+	   ('DW63772871', 'Ausilia', 'Costa', '+39 389 1307147', CURRENT_DATE, 15),
+	   ('WW42446670', 'Simona', 'Cremonesi', '+39 359 2584516', CURRENT_DATE, 15),
+	   ('VP39389476', 'Antonina', 'Manna', '+39 396 1839457', CURRENT_DATE, 15),
+	   ('YI95457886', 'Alfredo', 'Palermo', '+39 344 2025448', CURRENT_DATE, 15),
+	   ('NB7594523', 'Enzo', 'Berlino', '+39 386 8619132', CURRENT_DATE, 15),
+	   ('SH23367896', 'Gabriella', 'Lisbona', '+39 326 4727426', CURRENT_DATE, 15),
+	   
+	   ('KM38433214', 'Maurizio', 'Pisani', '+39 348 5353833', CURRENT_DATE, 18),
+	   ('JS57290713', 'Simone', 'Pelella', '+39 327 0429980', CURRENT_DATE, 18),
+	   ('WO38519827', 'Marco', 'Polo', '+39 383 0968732', CURRENT_DATE, 18),
+	   ('XU47825532', 'Aldo', 'Solo', '+39 324 5564475', CURRENT_DATE, 18),
+	   ('PX7230833', 'Rinaldo', 'Manganelli', '+39 351 3617698', CURRENT_DATE, 18),
+	   
+	   ('HC78731379', 'Cherubino', 'Iadanza', '+39 310 6556711', CURRENT_DATE, 19),
+	   ('NA13643318', 'Violanda', 'Lucchesi', '+39 392 8086927', CURRENT_DATE, 19),
+	   ('UD73290352', 'Venanzio', 'Fallaci', '+39 377 3884290', CURRENT_DATE, 19),
+	   ('GK35492105', 'Rita', 'Zito', '+39 370 9833141', CURRENT_DATE, 19),
+	   
+	   ('CO67875576', 'Pamela', 'Arcuri', '+39 346 6654971', CURRENT_DATE, 20),
+	   ('WY14381740', 'Ermanno ', 'Lo Duca', '+39 384 2159264', CURRENT_DATE, 20),
+	   ('XL17740135', 'Gino', 'Arcuri', '+39 359 9357965', CURRENT_DATE, 20),
+	   ('GC26197256', 'Loredana', 'Schiavone', '+39 320 7705925', CURRENT_DATE, 20),
+	   
+	   ('WY45123674', 'Maria', 'Pia Sagese', '+39 350 4603789', CURRENT_DATE, 21),
+	   ('JD28834726', 'Valentina', 'Fiorentino', '+39 338 9890154', CURRENT_DATE, 21),
+	   ('UG90492345', 'Ermenegilda', 'Ferrari', '+39 325 0346455', CURRENT_DATE, 21),
+	   ('TJ98316125', 'Demetria', 'Mazzi', '+39 340 6548832', CURRENT_DATE, 21),
+	   ('NA2697153', 'Carmen', 'Longo', '+39 383 5128733', CURRENT_DATE, 21),
+	   ('PI6959416', 'Rachele', 'Schiavone', '+39 311 0271780', CURRENT_DATE, 21),
+	   ('WV62306512', 'Leda', 'Udinese', '+39 332 4121313', CURRENT_DATE, 21),
+	   ('LE64900840', 'Quarto', 'Cremonesi', '+39 358 2775170', CURRENT_DATE, 21),
+	   
+	   ('DQ30435445', 'Arcangela', 'Rossi', '+39 353 4998551', CURRENT_DATE, 25),
+	   ('LQ41828189', 'Rosa', 'DeRose', '+39 389 2198716', CURRENT_DATE, 25),
+	   ('LH95783752', 'Gaudenzia', 'Costa', '+39 365 7712255', CURRENT_DATE, 25),
+	   ('ZN15977560', 'Ennio', 'Romano', '+39 362 9822130', CURRENT_DATE, 25),
+	   ('QD65366703', 'Adelinda', 'Boni', '+39 311 2524997', CURRENT_DATE, 25),
+	   ('OR26444540', 'Angelica', 'Toscani', '+39 365 5487561', CURRENT_DATE, 25),
+	   
+	   ('LY93271497', 'Agnese', 'Toscani', '+39 399 2029655', CURRENT_DATE, 30),
+	   ('VW91407778', 'Galileo', 'Rossi', '+39 318 9893321', CURRENT_DATE, 30),
+	   ('SR14901747', 'Alberto', 'Pisani', '+39 356 1784877', CURRENT_DATE, 30),
+	   ('WS60942682', 'Renata', 'Pisani', '+39 332 2844759', CURRENT_DATE, 30),
+	   
+	   ('ME6507664', 'Rachele', 'Udinesi', '+39 359 4238890', CURRENT_DATE, 40),
+	   ('OB60696185', 'Pietro', 'Lucchese', '+39 392 1652082', CURRENT_DATE, 40),
+	   ('YP58018572', 'Clementina', 'Bianchi', '+39 392 6391880', CURRENT_DATE, 40),
+	   ('CE79470075', 'Crispino', 'Mazzi', '+39 331 4080533', CURRENT_DATE, 40),
+	   ('FS67425237', 'Barnaba', 'Fallaci', '+39 396 3925321', CURRENT_DATE, 40),
+	   
+	   ('KU90509927', 'Davide', 'Gandolfo', '+39 316 5098378', CURRENT_DATE, 45),
+	   ('RC67498451', 'Tecla', 'Moretti', '+39 362 8867781', CURRENT_DATE, 45),
+	   ('ZG49996206', 'Geremia', 'Dellucci', '+39 351 2399647', CURRENT_DATE, 45),
+	   ('US71045256', 'Elvira', 'De Luca', '+39 340 3674473', CURRENT_DATE, 45),
+	   
+	   ('DG35621970', 'Leopoldo', 'Romano', '+39 397 2568663', CURRENT_DATE, 59),
+	   ('GB78935639', 'Antonietta', 'Toscano', '+39 311 5283224', CURRENT_DATE, 59),
+	   ('SZ14198022', 'Gabriella', 'Toscano', '+39 323 1467520', CURRENT_DATE, 59),
+	   ('QH21494761', 'Sandra', 'Udinese', '+39 356 1771118', CURRENT_DATE, 59),
+	   ('MS71883296', 'Crescente', 'Trentino', '+39 382 8762369', CURRENT_DATE, 59),
+	   ('IV34269175', 'Sara', 'Napolitano', '+39 341 3235536', CURRENT_DATE, 59),
+	   ('SO21993903', 'Isabella', 'Manna', '+39 397 4288227', CURRENT_DATE, 59);
+	   
+	   
+	   
+/*
+SELECT dataDiArrivo, COUNT(codCartaIdentità), codT
+FROM Avventore
+GROUP BY dataDiArrivo, codT
+ORDER BY codT, dataDiArrivo
+
+select* from  Tavolata
+order by codT, dataDiArrivo;
+*/
+
+
+/*
+INSERT INTO Tavolata(dataDiArrivo, n°avventori, codT)
+VALUES ('2022-01-29', 8, 21), ('2022-04-16', 5, 19), ('2019-03-22', 4, 50),
+	   ('2022-03-19', 14, 67), ('2015-12-04', 5, 45), ('2019-09-10', 2, 61),
+	   ('2022-01-29', 8, 58), ('2022-04-16', 5, 48), ('2019-03-22', 4, 1),
+	   ('2022-03-20', 14, 67), ('2015-12-04', 5, 10), ('2019-09-10', 2, 22),
+	   (CURRENT_DATE, 2, 1), (CURRENT_DATE, 4, 3), (CURRENT_DATE, 4, 4),
+	   (CURRENT_DATE, 4, 5), (CURRENT_DATE, 3, 8), (CURRENT_DATE, 4, 9),
+	   (CURRENT_DATE, 3, 12), (CURRENT_DATE, 6, 14), (CURRENT_DATE, 8, 15), 
+	   (CURRENT_DATE, 5, 18), (CURRENT_DATE, 4, 19), (CURRENT_DATE, 4, 20), 
+	   (CURRENT_DATE, 8, 21), (CURRENT_DATE, 6, 25), (CURRENT_DATE, 4, 30), 
+	   (CURRENT_DATE, 5, 40), (CURRENT_DATE, 4, 45), (CURRENT_DATE, 7, 59);
+*/

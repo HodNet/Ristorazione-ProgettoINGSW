@@ -1,0 +1,42 @@
+CREATE OR REPLACE PROCEDURE Errore(errorMessage VARCHAR(200))
+AS $$
+BEGIN
+	RAISE EXCEPTION '%', errorMessage;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER n°saleIsReadOnly
+BEFORE UPDATE OF n°sale ON Ristorante
+FOR EACH ROW
+EXECUTE PROCEDURE Errore('L attributo n°sale è calcolato automaticamente usando la tabella Sala, quindi non serve modificarlo a mano');
+
+CREATE OR REPLACE TRIGGER n°tavoliIsReadOnly
+BEFORE UPDATE OF n°tavoli ON Sala
+FOR EACH ROW
+EXECUTE PROCEDURE Errore('L attributo n°tavoli è calcolato automaticamente usando la tabella Tavolo, quindi non serve modificarlo a mano');
+
+CREATE OR REPLACE TRIGGER TavolataIsReadOnly
+BEFORE INSERT OR DELETE OR UPDATE ON Tavolata
+FOR EACH ROW
+EXECUTE PROCEDURE Errore('La tabella Tavolata è calcolata automaticamente usando la tabella Clientela, quindi non serve modificarla a mano');
+
+------------------------------------------------------------------------------------------
+
+SELECT C.codR, R.codR
+FROM (Servizio JOIN Cameriere ON codCameriere=codCartaIdentità 
+NATURAL JOIN Tavolo) AS C
+JOIN Sala AS S ON C.codS=S.codS
+JOIN Ristorante AS R ON S.codR=R.codR
+
+------------------------------------------------------------------------------------------
+
+/* stupido postgresql, i create assertion che ci ha insegnato peron non esistono qua, al loro posto dobbiamo usare 
+   i trigger con un "raise exception" dentro 
+CREATE ASSERTION n°MassimoDiAvventoriSuperato
+	CHECK (NOT EXISTS 
+	(
+		SELECT *
+		FROM Tavolata NATURAL JOIN Tavolo
+		WHERE Tavolata.n°avventori > Tavolo.n°maxAvventori
+	));
+*/

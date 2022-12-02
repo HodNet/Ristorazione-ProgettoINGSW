@@ -1,0 +1,92 @@
+
+CREATE OR REPLACE FUNCTION n°MassimoDiAvventoriSuperato()
+RETURNS TRIGGER
+AS $$
+BEGIN 
+	IF NEW.n°avventori > (SELECT n°maxAvventori FROM Tavolo WHERE codT = NEW.codT) THEN 
+		RAISE EXCEPTION 'Il tavolo di codice % contiene un numero insufficiente di posti 
+		per contenere % avventori', NEW.codT, NEW.n°avventori;
+	END IF;
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER n°MassimoDiAvventoriSuperato
+BEFORE INSERT OR UPDATE ON Tavolata
+FOR EACH ROW
+EXECUTE PROCEDURE n°MassimoDiAvventoriSuperato();
+
+--------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION TavoliAdiacentiDevonoAppartenereAllaStessaSala()
+RETURNS TRIGGER
+AS $$
+BEGIN 
+	IF (SELECT codS FROM Tavolo WHERE codT=NEW.tavolo1) <> (SELECT codS FROM Tavolo WHERE codT=NEW.tavolo2) THEN
+		RAISE EXCEPTION 'Il tavolo % non può essere adiacente al tavolo %', NEW.tavolo1, NEW.tavolo2;
+	END IF;
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER TavoliAdiacentiDevonoAppartenereAllaStessaSala
+BEFORE INSERT OR UPDATE ON TavoliAdiacenti
+FOR EACH ROW
+EXECUTE PROCEDURE TavoliAdiacentiDevonoAppartenereAllaStessaSala();
+
+--------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION ProprietàSimmetricaTavoliAdiacenti()
+RETURNS TRIGGER
+AS $$
+DECLARE
+	tavoloA integer;
+	tavoloB integer;
+BEGIN
+	SELECT tavolo1, tavolo2 INTO tavoloA, tavoloB
+	FROM TavoliAdiacenti
+	WHERE (tavolo2, tavolo1) NOT IN (SELECT* FROM TavoliAdiacenti);
+	IF tavoloA IS NOT NULL THEN
+		RAISE EXCEPTION 'Il tavolo % è adiacente al tavolo %, ma non viceversa', tavoloA, tavoloB;
+	END IF;
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER ProprietàSimmetricaTavoliAdiacenti
+AFTER INSERT OR UPDATE ON TavoliAdiacenti
+FOR EACH STATEMENT
+EXECUTE FUNCTION ProprietàSimmetricaTavoliAdiacenti();
+
+--------------------------------------------------------------------------
+
+-- Un cameriere, appartenente ad un certo ristorante di codice XX, può solo servire i tavoli aventi codR XX
+CREATE OR REPLACE FUNCTION TavoliServitiDaCameriereEstraneo()
+RETURNS TRIGGER
+AS $$
+DECLARE
+	codR_Cameriere integer;
+	codR_Tavolo integer;
+BEGIN
+	SELECT codR INTO codR_Cameriere
+	FROM Cameriere
+	WHERE codCartaIdentità=NEW.codCameriere;
+	SELECT codR INTO codR_Tavolo
+	FROM Tavolo NATURAL JOIN Sala NATURAL JOIN Ristorante
+	WHERE codT=NEW.codT;
+	IF codR_Cameriere <> codR_Tavolo THEN
+		RAISE EXCEPTION 'Il cameriere % (appartente al ristorante %) non può servire il tavolo % (appartenente 
+		al ristorante %)', NEW.codCameriere, codR_Cameriere, NEW.codT, codR_Tavolo;
+	END IF;
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER TavoliServitiDaCameriereEstraneo
+BEFORE INSERT OR UPDATE ON Servizio
+FOR EACH ROW
+EXECUTE FUNCTION TavoliServitiDaCameriereEstraneo();
+
+--------------------------------------------------------------------------
+
+--scrivi da qua in poi i tuoi vincoli

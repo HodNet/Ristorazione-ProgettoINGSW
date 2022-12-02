@@ -1,0 +1,4 @@
+SELECT codR, dataDiArrivo, SUM(n°avventori) AS avventori_tot
+FROM Ristorante NATURAL JOIN Sala NATURAL JOIN Tavolo NATURAL JOIN Tavolata
+GROUP BY codR, dataDiArrivo
+ORDER BY codR;

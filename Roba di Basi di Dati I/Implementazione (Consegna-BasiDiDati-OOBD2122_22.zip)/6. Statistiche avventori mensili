@@ -1,0 +1,4 @@
+SELECT codR, EXTRACT(YEAR FROM dataDiArrivo) AS anno, EXTRACT(MONTH FROM dataDiArrivo) AS mese, SUM(n°avventori) AS avventori_tot
+FROM Ristorante NATURAL JOIN Sala NATURAL JOIN Tavolo NATURAL JOIN Tavolata
+GROUP BY codR, EXTRACT(YEAR FROM dataDiArrivo), EXTRACT(MONTH FROM dataDiArrivo)
+ORDER BY codR;

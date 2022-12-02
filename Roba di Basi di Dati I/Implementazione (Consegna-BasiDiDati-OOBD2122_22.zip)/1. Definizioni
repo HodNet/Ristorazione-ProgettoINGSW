@@ -1,0 +1,102 @@
+DROP TABLE IF EXISTS Ristorante CASCADE;
+DROP TABLE IF EXISTS Sala CASCADE;
+DROP TABLE IF EXISTS Tavolo CASCADE;
+DROP TABLE IF EXISTS TavoliAdiacenti CASCADE;
+DROP TABLE IF EXISTS Tavolata CASCADE;
+DROP TABLE IF EXISTS Avventore CASCADE;
+DROP TABLE IF EXISTS Clientela CASCADE;
+DROP TABLE IF EXISTS Cameriere CASCADE;
+DROP TABLE IF EXISTS Servizio CASCADE;
+DROP TYPE IF EXISTS genere;
+
+CREATE TABLE Ristorante
+(
+	codR SERIAL PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL,
+	città VARCHAR(50) NOT NULL,
+	indirizzo VARCHAR(100) NOT NULL,
+	n°civico VARCHAR(5) NOT NULL,
+	n°sale integer,
+	oraApertura integer NOT NULL DEFAULT 20,
+	oraChiusura integer NOT NULL DEFAULT 22,
+	UNIQUE(città, indirizzo, n°civico)
+);
+
+CREATE TABLE Sala
+(
+	codS SERIAL PRIMARY KEY,
+	n°tavoli integer,
+	codR integer NOT NULL, 
+	FOREIGN KEY (codR) REFERENCES Ristorante(codR)
+);
+
+CREATE TABLE Tavolo
+(
+	codT SERIAL PRIMARY KEY,
+	n°maxAvventori integer NOT NULL,
+	codS integer NOT NULL,
+	FOREIGN KEY (codS) REFERENCES Sala(codS)
+);
+
+CREATE TABLE TavoliAdiacenti
+(
+	tavolo1 integer NOT NULL,
+	tavolo2 integer NOT NULL,
+	FOREIGN KEY(tavolo1) REFERENCES Tavolo(codT),
+	FOREIGN KEY(tavolo2) REFERENCES Tavolo(codT), 
+	UNIQUE(tavolo1, tavolo2)
+);
+
+CREATE TABLE Tavolata
+(
+	dataDiArrivo date NOT NULL,
+	n°avventori integer NOT NULL,
+	codT integer NOT NULL,
+	FOREIGN KEY(codT) REFERENCES Tavolo(codT),
+	PRIMARY KEY(DataDiArrivo, codT)
+);
+
+CREATE TABLE Avventore
+(
+	codCartaIdentità VARCHAR(12) PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL, 
+	cognome VARCHAR(50) NOT NULL, 
+	n°telefono VARCHAR(15),
+	UNIQUE(n°telefono) --Ogni persona ha un numero di telefono diverso
+);
+
+CREATE TABLE Clientela
+(
+	codCartaIdentità VARCHAR(12) NOT NULL,
+	dataDiArrivo date NOT NULL,
+	codT integer NOT NULL,
+	FOREIGN KEY(CodCartaIdentità) REFERENCES Avventore(codCartaIdentità),
+	UNIQUE(codCartaIdentità, dataDiArrivo) --Una stessa persona non può trovarsi in due posti contemporaneamente
+);
+
+CREATE TYPE genere AS ENUM('M', 'F');
+
+CREATE TABLE Cameriere
+(
+	codCartaIdentità VARCHAR(12) PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL, 
+	cognome VARCHAR(50) NOT NULL,
+	n°telefono VARCHAR(15) NOT NULL,
+	dataDiNascita date NOT NULL,
+	città VARCHAR(50),
+	indirizzo VARCHAR(100),
+	n°civico VARCHAR(5),
+	sesso genere,
+	codR integer NOT NULL,
+	FOREIGN KEY(codR) REFERENCES Ristorante(codR),
+	UNIQUE(n°telefono)
+);
+
+CREATE TABLE Servizio
+(
+	codCameriere VARCHAR(12) NOT NULL,
+	dataDiArrivo date NOT NULL,
+	codT integer NOT NULL,
+	FOREIGN KEY(codCameriere) REFERENCES Cameriere(codCartaIdentità),
+	CONSTRAINT servizio_datadiarrivo_codt_fkey FOREIGN KEY(dataDiArrivo, codT) REFERENCES Tavolata(dataDiArrivo, codT)
+);
